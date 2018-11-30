@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task.all.page(params[:page])
   end
 
   def show
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
       redirect_to @task
     else
       flash.now[:danger] = 'タスクが編集されませんでした'
-      render :new
+      render :edit
     end
   end
 
