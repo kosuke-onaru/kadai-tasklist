@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   
   resources :tasks
   resources :sessions
-  resources :users, only: [:index, :show, :new, :create]
+  #resources :users, only: [:index, :show, :new, :create]
+  resources :users, only: [:new]
   resources :toppages, only: [:index]
   
 end

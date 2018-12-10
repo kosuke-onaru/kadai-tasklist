@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:destroy,:show,:edit,:update]
   
   def index
     #@tasks = Task.all.page(params[:page])
@@ -68,8 +68,9 @@ class TasksController < ApplicationController
   
   def correct_user
     @task = current_user.tasks.find_by(id: params[:id])
-    unless @micropost
-      redirect_to toppages_path
+    unless @task
+      redirect_to tasks_path
+      flash[:danger] = '  あなた以外のタスクは閲覧及び編集はできません。'
     end
   end
   
